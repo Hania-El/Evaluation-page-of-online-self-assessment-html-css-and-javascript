@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Kategorie 1</title>
+    <style>
+        
+        html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
+        
+        body {
+            margin:0;
+        }
+        
+              
+        .cat {
+            display: block;
+            justify-content: center;
+        }
+     
+     
+        @media (min-width:800px){
+            .categories, .evaluation {float:left;}
+            .evaluation {position: relative; height: 450px; width: 800px;}
+            .categories {position: relative; height: 450px; width: 300px;}
+            #graph1{height: 220px; width: 220px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%)}
+            #container{position: absolute; left: 30%; top: 50%; transform: translate(-30%, -50%)}
+            #container{width:700px;}
+        }
+        
+        
+        @media (max-width:800px){
+            .evaluation, .categories {display: block;}
+            .categories {width: 100%; position: relative;}
+            #graph1{position: relative; height: 220px; width: 220px; margin-right: auto; margin-left: auto;}
+            }
+        
+        canvas {
+            display: block;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+        span {
+            color:#666;
+            display:block;
+            line-height:220px;
+            text-align:center;
+            width:220px;
+            font-family:sans-serif;
+            font-size:40px;
+            font-weight:100;
+            margin-left:5px;
+        }
+       
+        #text1a, #text1b{font-family: open sans; font-size: 16px; color:#666; line-height: 30px;}
+    
+    </style> 
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+    
+</head>
+
+<body>
+    
+    
+    
+    <main>
+    
+        <!--Teil mit Kategorien-->
+        <section class="cat">
+            
+            <!--Kategorie1-->
+            <div>
+            <article class="categories" id="cat1">
+                <div class="chart" id="graph1"><i id="cat1_perc"></i></div>
+            </article>
+            </div>
+            
+            <div class="evaluation">
+                <div id="container">
+                    <p id="text1a"></p>
+                    <p id="text1b"></p>
+                </div>
+            </div>
+        </section>
+        
+        
+                
+    </main>
+    
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+        setTimeout(function(){
+              var typeform = new XMLHttpRequest();
+              typeform.open("GET", "https://api.typeform.com/v1/form/lOBXSc?key=****************&completed=true&order_by[]=date_submit,desc&limit=1", false);
+              typeform.send(null);
+              var r = JSON.parse(typeform.response); 
+              
+              function resolve(obj,str){
+                  var undef;
+                  str=str.split(".");
+                  while (obj && str[0])
+                      obj=obj[str.shift()] || undef;
+                  return obj;
+              }
+              
+              
+              var score_1a;
+              var str1a = "responses.0.answers.list_62805050_choice";
+              if (resolve(r,str1a)=="0"){
+                  score_1a=1;
+              } else if (resolve(r,str1a)=="1-5"){
+                  score_1a=2;
+              } else if (resolve(r,str1a)=="6-15"){
+                  score_1a=3;
+              }else if (resolve(r,str1a)=="16-30"){
+                  score_1a=4;
+              }else if (resolve(r,str1a)==">30"){
+                  score_1a=5;
+              }
+              
+              var score_1b;
+              var str1b = "responses.0.answers.opinionscale_62206086";
+              if (resolve(r,str1b)=="1"||resolve(r,str1b)=="2"){
+                  score_1b=1;
+              } else if (resolve(r,str1b)=="3"||resolve(r,str1b)=="4"){
+                  score_1b=2;
+              } else if (resolve(r,str1b)=="5"||resolve(r,str1b)=="6"){
+                  score_1b=3;
+              }else if (resolve(r,str1b)=="7"||resolve(r,str1b)=="8"){
+                  score_1b=4;
+              }else if (resolve(r,str1b)=="9"||resolve(r,str1b)=="10"){
+                  score_1b=5;
+              }
+              
+              var score_1c;
+              var str1c = "responses.0.answers.opinionscale_62805314";
+              if (resolve(r,str1c)=="1"||resolve(r,str1c)=="2"){
+                  score_1c=1;
+              } else if (resolve(r,str1c)=="3"||resolve(r,str1c)=="4"){
+                  score_1c=2;
+              } else if (resolve(r,str1c)=="5"||resolve(r,str1c)=="6"){
+                  score_1c=3;
+              }else if (resolve(r,str1c)=="7"||resolve(r,str1c)=="8"){
+                  score_1c=4;
+              }else if (resolve(r,str1c)=="9"||resolve(r,str1c)=="10"){
+                  score_1c=5;
+              }
+              
+              var score_1d;
+              var str1d = "responses.0.answers.opinionscale_62805672";
+              if (resolve(r,str1d)=="1"||resolve(r,str1d)=="2"){
+                  score_1d=1;
+              } else if (resolve(r,str1d)=="3"||resolve(r,str1d)=="4"){
+                  score_1d=2;
+              } else if (resolve(r,str1d)=="5"||resolve(r,str1d)=="6"){
+                  score_1d=3;
+              }else if (resolve(r,str1d)=="7"||resolve(r,str1d)=="8"){
+                  score_1d=4;
+              }else if (resolve(r,str1d)=="9"||resolve(r,str1d)=="10"){
+                  score_1d=5;
+              }
+              
+              var score_1e;
+              var str1e = "responses.0.answers.list_62206627_choice";
+              if (resolve(r,str1e)=="0"){
+                  score_1e=1;
+              } else if (resolve(r,str1e)=="1-2"){
+                  score_1e=2;
+              } else if (resolve(r,str1e)=="3-5"){
+                  score_1e=3;
+              } else if (resolve(r,str1e)=="6-10"){
+                  score_1e=4;
+              } else if (resolve(r,str1e)==">10"){
+                  score_1e=5;
+              }
+              
+              var score_cat1 = score_1a+score_1b+score_1c+score_1d+score_1e;
+              var cat1_perc = Math.round((score_cat1/25)*100);
+              
+              
+              var score_2a;
+              var str2a = "responses.0.answers.opinionscale_59968550";
+              if (resolve(r,str2a)=="1"||resolve(r,str2a)=="2"){
+                  score_2a=1;
+              } else if (resolve(r,str2a)=="3"||resolve(r,str2a)=="4"){
+                  score_2a=2;
+              } else if (resolve(r,str2a)=="5"||resolve(r,str2a)=="6"){
+                  score_2a=3;
+              } else if (resolve(r,str2a)=="7"||resolve(r,str2a)=="8"){
+                  score_2a=4;
+              } else if (resolve(r,str2a)=="9"||resolve(r,str2a)=="10"){
+                  score_2a=5;
+              }
+              
+              var score_2b;
+              var str2b = "responses.0.answers.list_62209974_choice";
+              if (resolve(r,str2b)=="(fast) nie"||resolve(r,str2b)=="sporadisch"){
+                  score_2b=1;
+              } else if (resolve(r,str2b)=="jährlich"){
+                  score_2b=2;
+              } else if (resolve(r,str2b)=="quartalsweise"){
+                  score_2b=3;
+              } else if (resolve(r,str2b)=="monatlich"){
+                  score_2b=4;
+              } else if (resolve(r,str2b)=="täglich"){
+                  score_2b=5;
+              }
+              
+              var score_2c;
+              var str2c = "responses.0.answers.list_62807832_choice";
+              if (resolve(r,str2c)=="0"){
+                  score_2c=1;
+              } else if (resolve(r,str2c)=="1-2"){
+                  score_2c=2;
+              } else if (resolve(r,str2c)=="3-5"){
+                  score_2c=3;
+              } else if (resolve(r,str2c)=="6-10"){
+                  score_2c=4;
+              } else if (resolve(r,str2c)==">10"){
+                  score_2c=5;
+              }
+              
+              var score_2d;
+              var str2d = "responses.0.answers.opinionscale_63791129";
+              if (resolve(r,str2d)=="1"||resolve(r,str2d)=="2"){
+                  score_2d=1;
+              } else if (resolve(r,str2d)=="3"||resolve(r,str2d)=="4"){
+                  score_2d=2;
+              } else if (resolve(r,str2d)=="5"||resolve(r,str2d)=="6"){
+                  score_2d=3;
+              } else if (resolve(r,str2d)=="7"||resolve(r,str2d)=="8"){
+                  score_2d=4;
+              } else if (resolve(r,str2d)=="9"||resolve(r,str2d)=="10"){
+                  score_2d=5;
+              }
+             
+              var score_cat2 = score_2a+score_2b+score_2c+score_2d;
+              var cat2_perc = Math.round((score_cat2/20)*100);
+              
+              
+              var score_3a;
+              var str3a_1 = "responses.0.answers.rating_AB6kYVtlXUoE";
+              var str3a_2 = "responses.0.answers.rating_uSmvsglWSLXg";
+              var str3a_3 = "responses.0.answers.rating_nIRgBrwpIk8a";
+              score_3a=Math.round((Number(resolve(r,str3a_1))+Number(resolve(r,str3a_2))+Number(resolve(r,str3a_3)))/3);
+              
+              var score_3b;
+              var str3b = "responses.0.answers.opinionscale_62811561";
+              if (resolve(r,str3b)=="1"||resolve(r,str3b)=="2"){
+                  score_3b=1;
+              } else if (resolve(r,str3b)=="3"||resolve(r,str3b)=="4"){
+                  score_3b=2;
+              } else if (resolve(r,str3b)=="5"||resolve(r,str3b)=="6"){
+                  score_3b=3;
+              } else if (resolve(r,str3b)=="7"||resolve(r,str3b)=="8"){
+                  score_3b=4;
+              } else if (resolve(r,str3b)=="9"||resolve(r,str3b)=="10"){
+                  score_3b=5;
+              }
+               
+              var score_3c;
+              var str3c = "responses.0.answers.opinionscale_62811598";
+              if (resolve(r,str3c)=="1"||resolve(r,str3c)=="2"){
+                  score_3c=1;
+              } else if (resolve(r,str3c)=="3"||resolve(r,str3c)=="4"){
+                  score_3c=2;
+              } else if (resolve(r,str3c)=="5"||resolve(r,str3c)=="6"){
+                  score_3c=3;
+              } else if (resolve(r,str3c)=="7"||resolve(r,str3c)=="8"){
+                  score_3c=4;
+              } else if (resolve(r,str3c)=="9"||resolve(r,str3c)=="10"){
+                  score_3c=5;
+              }
+              
+              var score_3d;
+              var str3d = "responses.0.answers.list_62812267_choice";
+              if (resolve(r,str3d)=="0"){
+                  score_3d=1;
+              } else if (resolve(r,str3d)=="1-2"){
+                  score_3d=2;
+              } else if (resolve(r,str3d)=="3-5"){
+                  score_3d=3;
+              } else if (resolve(r,str3d)=="6-10"){
+                  score_3d=4;
+              } else if (resolve(r,str3d)==">10"){
+                  score_3d=5;
+              }
+              
+              score_cat3=score_3a+score_3b+score_3c+score_3d;
+              var cat3_perc = Math.round((score_cat3/20)*100);
+              
+              var score_4a;
+              var str4a = "responses.0.answers.list_62812363_choice";
+              if (resolve(r,str4a)=="0"){
+                  score_4a=1;
+              } else if (resolve(r,str4a)=="1-2"){
+                  score_4a=2;
+              } else if (resolve(r,str4a)=="3-5"){
+                  score_4a=3;
+              } else if (resolve(r,str4a)=="6-10"){
+                  score_4a=4;
+              } else if (resolve(r,str4a)==">10"){
+                  score_4a=5;
+              }
+              
+              var score_4b;
+              var str4b = "responses.0.answers.list_62812641_choice";
+              if (resolve(r,str4a)!="0"){
+                if (resolve(r,str4b)=="0"){
+                    score_4b=1;
+                } else if (resolve(r,str4b)=="1-2"){
+                    score_4b=2;
+                } else if (resolve(r,str4b)=="3-5"){
+                    score_4b=3;
+                } else if (resolve(r,str4b)=="6-10"){
+                    score_4b=4;
+                } else if (resolve(r,str4b)==">10"){
+                    score_4b=5;
+                }
+              } else {score_4b=0;}
+              
+              var score_4c;
+              var str4c = "responses.0.answers.list_62812981_choice";
+              if (resolve(r,str4c)=="0"){
+                  score_4c=1;
+              } else if (resolve(r,str4c)=="1-2"){
+                  score_4c=2;
+              } else if (resolve(r,str4c)=="3-5"){
+                  score_4c=3;
+              } else if (resolve(r,str4c)=="6-10"){
+                  score_4c=4;
+              } else if (resolve(r,str4c)==">10"){
+                  score_4c=5;
+              }
+              
+              var score_4d;
+              var str4d = "responses.0.answers.list_62959493_choice";
+              if (resolve(r,str4d)=="0-10%"){
+                  score_4d=1;
+              } else if (resolve(r,str4d)=="11-20%"){
+                  score_4d=2;
+              } else if (resolve(r,str4d)=="21-30%"){
+                  score_4d=3;
+              } else if (resolve(r,str4d)=="31-40%"){
+                  score_4d=4;
+              } else if (resolve(r,str4d)==">40%"){
+                  score_4d=5;
+              }
+              
+              var cat4_perc;
+              if (resolve(r,str4a)!="0") {
+                score_cat4=score_4a+score_4b+score_4c+score_4d;
+                cat4_perc = Math.round((score_cat4/20)*100);
+              } else {
+                score_cat4=score_4a+score_4c+score_4d;
+                cat4_perc = Math.round((score_cat4/15)*100);
+              }
+              
+              var overall_perc = Math.round((cat1_perc + cat2_perc + cat3_perc + cat4_perc)/4);
+              
+          
+          function circle(percentage, graphID, color){
+              
+              var options = {
+                  percent: percentage,
+                  size:  220,
+                  lineWidth:  13,
+                  rotate:  0
+              };
+              
+              var canvas = document.createElement('canvas');
+              var span = document.createElement('span');
+              span.textContent = options.percent + "%";
+              
+              if (typeof(G_vmlCanvasManager) !== 'undefined') {
+                  G_vmlCanvasManager.initElement(canvas);
+              }
+              
+              var ctx = canvas.getContext('2d');
+              canvas.width = canvas.height = options.size;
+              
+              document.getElementById(graphID).appendChild(span);
+              document.getElementById(graphID).appendChild(canvas);
+              
+              ctx.translate(options.size / 2, options.size / 2); // change center
+              ctx.rotate((-1 / 2 + options.rotate / 180) * Math.PI); // rotate -90 deg
+              
+              var radius = (options.size - options.lineWidth) / 2;
+                    
+              var drawCircle = function(color, lineWidth, percent) {
+                          percent = Math.min(Math.max(0, percent), 1);
+                          ctx.beginPath();
+                          ctx.arc(0, 0, radius, 0, Math.PI * 2 * percent, false);
+                          ctx.strokeStyle = color;
+                          ctx.lineCap = 'round'; 
+                          ctx.lineWidth = lineWidth;
+                          ctx.stroke();
+              };
+              
+              drawCircle('#efefef', options.lineWidth, 100 / 100);
+              drawCircle(color, options.lineWidth, options.percent / 100);
+              
+              /*var x=0;
+              var dx=0.2;
+              function animation (){
+                  requestAnimationFrame(animation);
+                  drawCircle(color, options.lineWidth, x / 100);
+                  x+=dx;
+                  if (x>options.percent){
+                      dx=0;
+                  }
+              }
+               animation ();   */   
+          }
+          
+          circle (cat1_perc, "graph1", "#e51a54");
+          
+          if (cat1_perc<=25){
+                    document.getElementById("text1a").innerHTML="Ihre Geschäftsprozesse sind noch sehr klassisch  organisiert. Die Vorteile der Nutzung digitaler Technologien zur Optimierung der Abläufe in Qualität und Geschwindigkeit werden noch nicht genutzt.";
+                    document.getElementById("text1b").innerHTML="Identifizieren Sie Ihre Kernprozesse, ihre Engpässe oder aufwändige einzelne Schritte. Berücksichtigen Sie dabei den Informationsfluß und Übergabepunkte. Nutzen Sie zunächst Ihre bestehenden Systeme, deren Schnittstellen zu externen Integrationsplattformen, um schrittweise Ihre Kernabläufe zu digitalisieren.";
+              } else if (cat1_perc>25 && cat1_perc <=50){
+                    document.getElementById("text1a").innerHTML="Sie sind auf einem guten Weg und haben bereits Effizienzgewinne durch die Nutzung digitaler Technologien erzielt. Hören Sie aber jetzt nicht auf. Es gibt zahlreiche neue Services und Anwendungen sowie Start Ups, die zu Ihnen passen könnten.";
+                    document.getElementById("text1b").innerHTML="Mit einem \"Digital-Prozess-Mapping\" können Sie Ihren aktuellen Digitalisierungsstatus feststellen und damit gezielt die nächsten Schritte in der kontinuierlichen Optimierung Ihres Geschäfts definieren.";             
+              } else if (cat1_perc>50 && cat1_perc <=75){
+                    document.getElementById("text1a").innerHTML="Respekt! Sie sind weit vorne bei der Digitalisierung Ihrer bestehenden Abläufe und Aktivitäten! Das volle Potenzial der Effizienzsteigerung wurde aber noch nicht ausgeschöpft.";
+                    document.getElementById("text1b").innerHTML="Mit dem \"Digital-Prozess-Mapping\" können Sie Ihren aktuellen Digitalisierungsstatus feststellen und damit gezielt die nächsten Schritte in der kontinuierlichen Optimierung Ihres Geschäfts definieren.";
+              } else if (cat1_perc>75){
+                    document.getElementById("text1a").innerHTML="Gratulation! Sie sind Pionier bei der Digitalisierung Ihrer bestehenden Abläufe und Aktivitäten! Andere Unternehmen können sich von Ihnen ein Beispiel nehmen.";
+                    document.getElementById("text1b").innerHTML="Zünden Sie nun die nächste Stufe und entwickeln Sie neue Geschäftsmodelle und Leistungen. Wir helfen und unterstützen Sie dabei gerne durch die Vermittlung von Methodenkompetenzen und eine aktive Begleitung der Entwicklungsprojekte.";
+              }
+        }, 1000);      
+    });
+    </script>
+</body>
+</html>
